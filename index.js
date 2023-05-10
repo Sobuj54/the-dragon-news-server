@@ -32,8 +32,13 @@ app.get("/news/:id", (req, res) => {
 app.get("/categories/:id", (req, res) => {
   const id = req.params.id;
   console.log(id);
-  const categoryNews = news.filter((n) => n.category_id === id);
-  res.send(categoryNews);
+  // 0 id will  show all news category
+  if (id == 0) {
+    res.send(news);
+  } else {
+    const categoryNews = news.filter((n) => n.category_id === id);
+    res.send(categoryNews);
+  }
 });
 
 app.listen(port, () => {
